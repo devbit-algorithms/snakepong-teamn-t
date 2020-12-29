@@ -1,15 +1,15 @@
 class BaseButton:
-    def __init__(self,id,TRPos,BLPos):
-        self._TRPos = TRPos
-        self._BLPos = BLPos
-        self._id = id
+    def __init__(self,aID,aPos,aL,aH):
+        self._Pos = aPos
+        self._l = aL
+        self._h = aH
+        self._id = aID
 
-    def __draw__(self):
+    def __draw__(self,screen):
         pass
 
-    def isOverButton(self,pos):#make test for this
-        return (self._TRPos[0] < pos[0] and self._TRPos[1] < pos[1] and
-                self._BLPos[0] > pos[0] and self._BLPos[1] > pos[1])
+    def getId(self):
+        return self._id
 
-        
-        
+    def isOverButton(self, aPos):#make test for this
+        return self._Pos[0] < aPos[0] < (self._Pos[0] + self._l) and self._Pos[1] < aPos[1] < (self._Pos[1] + self._h)
