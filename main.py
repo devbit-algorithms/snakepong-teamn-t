@@ -6,17 +6,14 @@ import time
 class Game:
     def __init__(self):
         self._running = True
-        self._display_surf = None
+        self._screen = None
         self.size = self.weight,self.height = 640, 400
 
     
     def onInit(self):
         pygame.init()
-        self._display_surf = pygame.display.set_mode(self.size,pygame.SCALED)
+        self._screen = pygame.display.set_mode(self.size,pygame.SCALED)
         self._running = True
-        size = pygame.display.Info()
-        b = size.current_w
-        a = 10
 
     def onEvent(self, event):
         if event.type == pygame.QUIT:
@@ -29,7 +26,9 @@ class Game:
         pass
 
     def onRender(self):
-        pass
+        pygame.draw.rect(self._screen,(255,255,255),(100,100,100,100),1)
+        pygame.display.update()
+
 
     def onCleanup(self):
         pygame.quit()
