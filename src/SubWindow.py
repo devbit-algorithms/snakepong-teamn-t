@@ -1,14 +1,7 @@
 import pygame
 from pygame.font import Font
-from enum import Enum
 
-
-class TextModes(Enum):
-    CENTER = 0
-    CORNER_RIGHT_UP = 1
-    CORNER_RIGHT_DOWN = 2
-    CORNER_LEFT_UP = 3
-    CORNER_LEFT_DOWN = 4
+from src.Util import CenterModes
 
 
 class SubWindow:
@@ -40,7 +33,7 @@ class SubWindow:
     def drawBackGround(self, aColor):
         self.drawRect(aColor, 0, 0, self._l, self._h, 0)
 
-    def drawText(self, aText, aFont: Font, aColor, aPos, aMode: TextModes):
+    def drawText(self, aText, aFont: Font, aColor, aPos, aMode: CenterModes):
         aPos = self.getTrueValidCoords(aPos)
         img = aFont.render(aText, False, aColor)
         aPos = self.repositionImgPos(img,aPos,aMode)
@@ -60,20 +53,20 @@ class SubWindow:
         return x, y
 
     def repositionImgPos(self, aImg: pygame.Surface, aPos, aMode):#write test
-        if aMode == TextModes.CENTER:
+        if aMode == CenterModes.CENTER:
             xOffset = aImg.get_width() >> 1
             yOffset = aImg.get_height() >> 1
             return aPos[0]-xOffset, aPos[1] - yOffset
-        elif aMode == TextModes.CORNER_RIGHT_UP:
+        elif aMode == CenterModes.CORNER_RIGHT_UP:
             xOffset = aImg.get_width()
             return aPos[0]-xOffset,aPos[1]
-        elif aMode == TextModes.CORNER_RIGHT_DOWN:
+        elif aMode == CenterModes.CORNER_RIGHT_DOWN:
             xOffset = aImg.get_width()
             yOffset = aImg.get_height()
             return aPos[0]-xOffset,aPos[1]-yOffset
-        elif aMode == TextModes.CORNER_LEFT_UP:
+        elif aMode == CenterModes.CORNER_LEFT_UP:
             return aPos
-        elif aMode == TextModes.CORNER_LEFT_DOWN:
+        elif aMode == CenterModes.CORNER_LEFT_DOWN:
             yOffset = aImg.get_height()
             return aPos[0], aPos[1]-yOffset
 
