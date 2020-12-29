@@ -1,19 +1,18 @@
 import pygame
 import time
-
+from src.SubWindow import SubWindow
+from src.screens.MainMenu import MainMenu
 
 
 class Game:
     def __init__(self):
-        self._running = True
-        self._screen = None
-        self.size = self.weight,self.height = 640, 400
-
-    
-    def onInit(self):
         pygame.init()
-        self._screen = pygame.display.set_mode(self.size,pygame.SCALED)
+        pygame.font.init()
         self._running = True
+        self.size = self.weight, self.height = 640, 400
+        self._headDisplay = pygame.display.set_mode(self.size, pygame.SCALED)
+        self._mainSubWindow = SubWindow(self._headDisplay, 0, 0, 640, 400)
+        self._window = MainMenu(self._mainSubWindow)
 
     def onEvent(self, event):
         if event.type == pygame.QUIT:
@@ -23,23 +22,18 @@ class Game:
             b = event.pos[1]
 
     def onLoop(self):
-        pass
+        self._window.onUpdate()
 
     def onRender(self):
-        pygame.draw.rect(self._screen,(255,255,255),(100,100,100,100),1)
+        self._window.onRender()
         pygame.display.update()
-
 
     def onCleanup(self):
         pygame.quit()
 
 
-
-
-
 def main():
     game = Game()
-    game.onInit()
     while game._running:
         for event in pygame.event.get():
             game.onEvent(event)
@@ -49,6 +43,5 @@ def main():
     game.onCleanup()
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()
-
