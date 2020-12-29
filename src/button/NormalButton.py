@@ -1,5 +1,5 @@
 from src.button.BaseButton import BaseButton
-from src.SubWindow import TextModes
+from src.SubWindow import CenterModes
 from src.Util import Colors
 import pygame
 
@@ -15,7 +15,9 @@ class NormalButton(BaseButton):
         self._textPos = (aL >> 1,aH >> 1)
 
     def draw(self):
-        if self._drawBackground:
-            self._window.drawBackGround(self._colorBackground)
-        self._window.drawBorder(self._colorText,1,)
-        self._window.drawText(self._text,self._font,self._colorText,self._textPos,TextModes.CENTER)
+        if self._drawBackground or self._selected:
+            self._window.drawBackGround(self._colorText if self._selected else self._colorBackground)
+        if not self._selected:
+            self._window.drawBorder(self._colorText,1,)
+        self._window.drawText(self._text, self._font, self._colorBackground if self._selected else self._colorText,
+                              self._textPos, CenterModes.CENTER)
