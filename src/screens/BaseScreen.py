@@ -7,7 +7,7 @@ class BaseScreen:
     def onUpdate(self):
         pass
     
-    def onRender(self,display):
+    def onRender(self):
         pass
 
     def onKill(self):
