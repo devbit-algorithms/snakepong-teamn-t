@@ -1,9 +1,7 @@
-class NormalButton:
-    def __init__(self,id,x,y,text):
-        self._x = x
-        self._y = y
-        self._id = id
-        self._text = text
-    
-    
+from src.button.BaseButton import BaseButton
 
+
+class NormalButton(BaseButton):
+    def __init__(self,aID,aPos,aL,aH,aText):
+        super().__init__(aID,aPos,aL,aH)
+        self._text = aText
