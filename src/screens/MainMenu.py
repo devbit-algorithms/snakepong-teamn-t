@@ -4,6 +4,7 @@ from src.button.NormalButton import NormalButton
 from src.Utils.Util import calcuateOffset,CenterModes
 from src.Statics import Input
 import pygame
+from src.screens.LevelScreen import LevelScreen
 
 
 
@@ -32,6 +33,7 @@ class MainMenu(BaseScreen):
                         break
                 if id == 1:
                     self._isAlive = False
+                    self._returnWindow = LevelScreen(self._parrent)
                 elif id == 2:
                     self._isAlive = False
 
