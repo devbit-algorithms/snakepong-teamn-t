@@ -12,6 +12,26 @@ class SubWindow:
         self._h = aH
         self._screen = aScreen
 
+    def setNewPos(self,aPos,aMode: CenterModes):# wtrie test
+        if aMode == CenterModes.CENTER:
+            self._x = aPos[0] - (self._l >> 1)
+            self._y = aPos[1] - (self._h >> 1)
+        elif aMode == CenterModes.CORNER_LEFT_UP:
+            self._x = aPos[0]
+            self._y = aPos[1]
+        elif aMode == CenterModes.CORNER_LEFT_DOWN:
+            self._x = aPos[0]
+            self._y = aPos[1] - self._h
+        elif aMode == CenterModes.CORNER_RIGHT_UP:
+            self._x = aPos[0] - self._l
+            self._y = aPos[1]
+        elif aMode == CenterModes.CORNER_RIGHT_DOWN:
+            self._x = aPos[0] - self._l
+            self._y = aPos[1] - self._h
+
+    def getTruePos(self):
+        return self._x,self._y
+
     def drawRect(self, aColor, aX, aY, aL, aH, aW):
         x, y = self.getTrueValidCoords((aX, aY))
         h = self.getTrueValidCoords((aX + aL, aY + aH))
