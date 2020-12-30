@@ -1,7 +1,7 @@
 import pygame
 from pygame.font import Font
 
-from src.Util import CenterModes
+from src.Utils.Util import CenterModes
 
 
 class SubWindow:
