@@ -1,17 +1,14 @@
-from src.Entitys.BaseEntity import BaseEntity
+from src.Entitys.BaseEntity import HitBoxCircle,HitBoxSquare
 
 class ColideUtils:
     @staticmethod
-    def colideSquairs(aEntity1: BaseEntity, aEntity2):
+    def colideSquairs(aEntity1: HitBoxSquare, aEntity2: HitBoxSquare):
         pass
 
     @staticmethod
-    def colideCircils(aEntity1: BaseEntity, aEnttiy2: BaseEntity):
+    def colideCircils(aEntity1: HitBoxCircle, aEnttiy2: HitBoxCircle):
         pass
 
     @staticmethod
-    def colideCircleSquair(aCircle: BaseEntity, aSquair: BaseEntity):
+    def colideCircleSquair(aCircle: HitBoxCircle, aSquair: HitBoxSquare):
         pass
-
-    SQUAIR = 0
-    CIRCLE = 1

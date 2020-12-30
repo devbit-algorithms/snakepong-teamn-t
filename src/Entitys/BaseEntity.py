@@ -38,3 +38,11 @@ class HitBoxSquare(HitBox):
         self.Y = aY
         self.L = aL
         self.H = aH
+
+
+class HitBoxCircle(HitBox):
+    def __init__(self,aX,aY,aSize):
+        super().__init__(HitBox.CIRCLE)
+        self.x = aX
+        self.y = aY
+        self.size = aSize
