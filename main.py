@@ -31,6 +31,7 @@ class Game:
         Input.keyEvent = None
 
     def onRender(self):
+        self._headDisplay.fill((0,0,0))
         timeA = time.time()
         self._window.onRender()
         timeB = time.time()
