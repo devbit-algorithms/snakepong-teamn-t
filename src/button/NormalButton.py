@@ -1,6 +1,6 @@
 from src.button.BaseButton import BaseButton
 from src.SubWindow import CenterModes
-from src.Util import Colors
+from src.Utils.Util import Colors
 import pygame
 
 
