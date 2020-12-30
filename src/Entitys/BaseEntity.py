@@ -1,6 +1,7 @@
 class BaseEntity:
-    def __init__(self):
-        pass
+    def __init__(self,aX,aY):
+        self._x = aX
+        self._y = aY
 
     def draw(self):
         pass
@@ -19,9 +20,6 @@ class BaseEntity:
 
     def colide(self,aEntity):
         return -1
-
-    def getHitBox(self):
-        return None
 
 
 class HitBox:
