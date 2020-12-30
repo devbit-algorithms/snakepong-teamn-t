@@ -1,5 +1,3 @@
-
-
 class BaseScreen:
     def __init__(self):
         pass
@@ -9,6 +7,9 @@ class BaseScreen:
     
     def onRender(self):
         pass
+
+    def isAlive(self):
+        return False
 
     def onKill(self):
         return None
