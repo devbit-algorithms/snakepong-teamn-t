@@ -65,8 +65,8 @@ class BaseEntity:
 
 
 class HitBox:
-    def __init__(self):
-        self.type = None
+    def __init__(self,aType=None):
+        self.type = aType
     SQUAIR = 0
     CIRCLE = 1
 
