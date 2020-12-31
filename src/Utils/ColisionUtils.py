@@ -5,8 +5,8 @@ from math import sqrt
 def colideSquairs(aHitBox1: HitBoxSquare, aHitBox2: HitBoxSquare):
     return (aHitBox1.X < aHitBox2.X < (aHitBox1.X + aHitBox1.L) or aHitBox2.X < aHitBox1.X < (
                 aHitBox2.X + aHitBox2.L)) and (
-                   aHitBox1.Y < aHitBox2.Y < (aHitBox1.Y - aHitBox1.H) or aHitBox2.Y < aHitBox1.Y < (
-                       aHitBox2.Y - aHitBox2.H))
+                   aHitBox1.Y < aHitBox2.Y < (aHitBox1.Y + aHitBox1.H) or aHitBox2.Y < aHitBox1.Y < (
+                       aHitBox2.Y + aHitBox2.H))
 
 
 def colideCircils(aHitBox1: HitBoxCircle, aHitBox2: HitBoxCircle):
