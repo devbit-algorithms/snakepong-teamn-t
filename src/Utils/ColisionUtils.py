@@ -1,5 +1,6 @@
 from src.Entitys.BaseEntity import HitBoxCircle, HitBoxSquare
 from math import sqrt
+import math
 
 
 def colideSquairs(aHitBox1: HitBoxSquare, aHitBox2: HitBoxSquare):
@@ -14,16 +15,30 @@ def colideCircils(aHitBox1: HitBoxCircle, aHitBox2: HitBoxCircle):
     return dist < aHitBox1.size or dist < aHitBox2.size
 
 
+def clamp(aMin,aMax,aValue):
+    return max(min(aValue, aMax), aMin)
+
+
 def colideCircleSquair(aCircle: HitBoxCircle, aSquair: HitBoxSquare):
-    if aCircle.X < aSquair.X:
-        offsetX = aSquair.X
-    else:
-        offsetX = aSquair.X + aSquair.L
-    if aCircle.Y < aSquair.Y:
-        offsetY = aSquair.Y
-    else:
-        offsetY = aSquair.Y + aSquair.H
-    distX = aCircle.X - offsetX
-    distY = aCircle.Y - offsetY
+
+    xOffset = clamp(aSquair.X,(aSquair.X + aSquair.L),aCircle.X)
+    yOffset = clamp(aSquair.Y,(aSquair.Y + aSquair.H),aCircle.Y)
+
+    distX = aCircle.X - xOffset
+    distY = aCircle.Y - yOffset
     distance = sqrt((distX ** 2) + (distY ** 2))
     return distance < aCircle.size
+
+    # circleDistance.x = abs(circle.x - rect.x);
+    # circleDistance.y = abs(circle.y - rect.y);
+    #
+    # if (circleDistance.x > (rect.width/2 + circle.r)) { return false; }
+    # if (circleDistance.y > (rect.height/2 + circle.r)) { return false; }
+    #
+    # if (circleDistance.x <= (rect.width/2)) { return true; }
+    # if (circleDistance.y <= (rect.height/2)) { return true; }
+    #
+    # cornerDistance_sq = (circleDistance.x - rect.width/2)^2 +
+    #                      (circleDistance.y - rect.height/2)^2;
+    #
+    # return (cornerDistance_sq <= (circle.r^2));
