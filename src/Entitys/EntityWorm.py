@@ -124,13 +124,14 @@ class EntityWorm(BaseEntity):
 
     def moveWorm(self,aAmount):
         toMove = self.moveEntityDirection(aAmount,self._direction,self._parrent)
-        firstBody = self._bodyParts[0]
-        if firstBody.getDirection() != self._direction:
-            self.turnWorm(self._direction,aAmount,firstBody)
-        else:
-            self.increaseSize(aAmount,firstBody)
-        while toMove > 0:
-            toMove = self.reduceBehind(toMove,self._with)
+        if toMove > 0:
+            firstBody = self._bodyParts[0]
+            if firstBody.getDirection() != self._direction:
+                self.turnWorm(self._direction,aAmount,firstBody)
+            else:
+                self.increaseSize(aAmount,firstBody)
+            while toMove > 0:
+                toMove = self.reduceBehind(toMove,self._with)
 
     def reduceBehind(self, aAmount,aMinSize):
         amountBodyIndex = len(self._bodyParts) - 1
