@@ -101,21 +101,26 @@ class EntityWorm(BaseEntity):
         oldDirection = oldHead.getDirection()
         offset = 0
         if oldDirection == Directions.SOUTH or oldDirection == Directions.EAST:
-            offset += 1
+            offset -= self._with
         if aDirection == Directions.NORTH:
             newBody = EntityWormBody(self._parrent, self._x + offset, self._y - initialSize, self._with,
                                      self._with + initialSize, aDirection)
+            self._x, self._y = newBody.getPos()
         elif aDirection == Directions.SOUTH:
             newBody = EntityWormBody(self._parrent, self._x + offset, self._y, self._with,
                                      self._with + initialSize, aDirection)
+            self._x, self._y = newBody.getPos()
+            self._y += self._with + initialSize
         elif aDirection == Directions.EAST:
             newBody = EntityWormBody(self._parrent, self._x, self._y + offset, self._with + initialSize,
                                      self._with, aDirection)
+            self._x, self._y = newBody.getPos()
+            self._x += self._with + initialSize
         elif aDirection == Directions.WEST:
             newBody = EntityWormBody(self._parrent, self._x - initialSize, self._y + offset,
                                      self._with + initialSize, self._with, aDirection)
+            self._x, self._y = newBody.getPos()
         self._bodyParts.insert(0,newBody)
-        self._x, self._y = newBody.getPos()
 
     def moveWorm(self,aAmount):
         toMove = self.moveEntityDirection(aAmount,self._direction,self._parrent)
@@ -125,19 +130,30 @@ class EntityWorm(BaseEntity):
         else:
             self.increaseSize(aAmount,firstBody)
         while toMove > 0:
-            toMove = self.reduceBehind(toMove)
+            toMove = self.reduceBehind(toMove,self._with)
 
-    def reduceBehind(self, aAmount):
+    def reduceBehind(self, aAmount,aMinSize):
         amountBodyIndex = len(self._bodyParts) - 1
         lastBody = self._bodyParts[amountBodyIndex]
-        length = lastBody.getLength()
+        length = lastBody.getLength() - aMinSize
         if length < aAmount:
             aAmount -= length
             self._bodyParts.pop(amountBodyIndex)
             return aAmount
         else:
-            lastBody.setLength(length-aAmount)
+            #lastBody.setLength(length-aAmount)
+            self.degreeseSize(aAmount,lastBody)
             return 0
+
+    def degreeseSize(self, aAmount, aBody: EntityWormBody):
+        aBody.setLength(aBody.getLength() - aAmount)
+        direction = aBody.getDirection()
+        if direction == Directions.SOUTH:
+            x, y = aBody.getPos()
+            aBody.setNewPos((x,y+aAmount))
+        elif direction == Directions.EAST:
+            x, y = aBody.getPos()
+            aBody.setNewPos((x+aAmount,y))
 
     def increaseSize(self, aAmount, aBody: EntityWormBody):
         aBody.setLength(aBody.getLength() + aAmount)

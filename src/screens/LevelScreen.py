@@ -13,7 +13,7 @@ class LevelScreen(BaseScreen):
         self._alive = True
         self._buttons = []
         self._buttons.append(NormalButton(self._window,1,(l-100,h-60),80,40,"MENU"))
-        World.addEnttity(EntityWorm(self._window,100,100,10,60,1))
+        World.addEnttity(EntityWorm(self._window,100,100,10,60,8))
 
 
     def onRender(self):
