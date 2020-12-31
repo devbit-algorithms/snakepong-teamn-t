@@ -10,10 +10,11 @@ class LevelScreen(BaseScreen):
         x,y,l,h = aParrent.getSize()
         self._tick = 0
         self._window = aParrent.newChildWindow(x,y,l,h)
+        self._palyerField = aParrent.newChildWindow(x+100,y,l-200,h)
         self._alive = True
         self._buttons = []
         self._buttons.append(NormalButton(self._window,1,(l-100,h-60),80,40,"MENU"))
-        World.addEnttity(EntityWorm(self._window,100,100,10,60,8))
+        World.addEnttity(EntityWorm(self._palyerField,100,100,10,60,4))
 
 
     def onRender(self):
@@ -24,10 +25,9 @@ class LevelScreen(BaseScreen):
 
     def onUpdate(self):
         self._tick += 1
-        if self._tick > 200:
-            if self._tick%4 == 0:
-                for entity in World.livingEntityList:
-                    entity.update()
+        if self._tick > 30:
+            for entity in World.livingEntityList:
+                entity.update()
 
     def isAlive(self):
         return self._alive
