@@ -99,3 +99,7 @@ class SubWindow:
 
     def getSize(self):  # write test
         return self._x, self._y, self._l, self._h
+
+    def reSize(self,aL,aH):
+        self._l = aL
+        self._h = aH

@@ -1,10 +1,15 @@
+from typing import List
+from pygame.event import Event
+
+from src.Entitys.BaseEntity import BaseEntity
+
 class Input:
-    mousEvent = None
-    keyEvent = None
+    mousEvent: Event = None
+    keyEvent: Event = None
 
 
 class World:
-    livingEntityList = []
+    livingEntityList: List[BaseEntity] = []
 
     @staticmethod
     def addEnttity(aEntity):
